@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Heading -->
 # Heading 1
 ## Heading 2
@@ -69,3 +70,6 @@ console.log('Hello World!');
 - [x] Finish my changes
 - [ ] Push my commits to GitHub
 - [ ] Open a pull request
+=======
+# kiosk
+>>>>>>> f0904ba36ff20dfed34522a7d6617a7aec9b0fba
