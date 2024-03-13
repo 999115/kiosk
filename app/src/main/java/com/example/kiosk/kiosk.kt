@@ -22,7 +22,7 @@ fun main() {
 
         userMenu1 = menuNum
 
-        var afterMenu = when (userMenu1) {
+        var afterMain = when (userMenu1) {
             1 -> BugerMenu(userMenu1)
             2 -> BeverageMenu(userMenu1)
             3 -> SideMenu(userMenu1)
@@ -30,7 +30,8 @@ fun main() {
             5 -> break
             else -> ElseMenu(userMenu1)
         }
-        afterMenu.menuPrint()
+        afterMain.menuPrint()
+        afterMain.paymentMenu()
     }
 
 //    while (true) {

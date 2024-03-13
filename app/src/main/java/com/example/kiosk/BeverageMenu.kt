@@ -2,18 +2,58 @@ package com.example.kiosk
 
 class BeverageMenu(menuNum: Int) : Menu(menuNum) {
 
+    var menuIndex = mutableListOf<String>(
+        "맥커피 아이스\t",
+        "맥커피 핫\t",
+        "콜라\t\t\t",
+        "제로콜라\t\t",
+        "사이다\t\t",
+        "제로사이다\t",
+        "환타오렌지\t",
+        "생수\t\t\t"
+    )
+
+    override var menuMap = mutableMapOf<String, Int>(
+        menuIndex[0] to 3000,
+        menuIndex[1] to 2600,
+        menuIndex[2] to 1700,
+        menuIndex[3] to 1700,
+        menuIndex[4] to 1700,
+        menuIndex[5] to 1700,
+        menuIndex[6] to 1700,
+        menuIndex[7] to 1300
+    )
+
     override fun menuPrint() {
         println("음료 메뉴입니다.")
         println("원하는 메뉴를 선택해 번호를 입력해주세요.")
-        println("1 | 맥커피 아이스")
-        println("2 | 맥커피 핫")
-        println("3 | 콜라")
-        println("4 | 제로콜라")
-        println("5 | 사이다")
-        println("6 | 제로사이다")
-        println("7 | 환타오렌지")
-        println("8 | 생수")
-        println("9 | 이전")
+        for (i in menuIndex.indices) {
+            println("${i + 1} | ${menuIndex[i]}| ${menuMap[menuIndex[i]]}원")
+        }
+        println("${menuIndex.size + 1} | 이전")
+
+        while (true) {
+            try {
+                menuNum = readLine()!!.toInt()
+                when (menuNum-1) {
+                    in menuIndex.indices -> break
+                    menuIndex.size -> println("미구현 기능입니다.")
+                    else -> println("1부터 ${menuIndex.size + 1}까지의 숫자만 입력해주세요.")
+                }
+            } catch (e: NumberFormatException) {
+                println("숫자만 입력해주세요.")
+            }
+        }
+    }
+
+    override fun paymentMenu() {
+        println("결제메뉴입니다.")
+        println("현재 잔액 \t: 원")
+        println("결제할 금액 \t: ${menuMap[menuIndex[menuNum - 1]]}원")
+        println("원하는 메뉴를 선택해 번호를 입력해주세요.")
+        println("1 | 결제")
+        println("2 | 장바구니에 넣고 주문 계속하기")
+        println("3 | 이전")
 
         while (true) {
             try {
