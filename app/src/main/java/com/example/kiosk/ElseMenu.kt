@@ -2,8 +2,11 @@ package com.example.kiosk
 
 class ElseMenu(menuNum: Int) : Menu(menuNum) {
 
-    override fun menuPrint() {
-        println("잘못된 입력입니다.")
-//        println("원하는 메뉴를 선택해 번호를 입력해주세요.")
+    override fun foodMenuPrint() {
+        println("잘못된 입력입니다. 0부터 4까지의 숫자만 입력해주세요.")
+    }
+
+    fun beforeMenuPrint() {
+
     }
 }

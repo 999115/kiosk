@@ -2,16 +2,14 @@ package com.example.kiosk
 
 open class Menu(menuNum: Int) {
 
-    open var menuMap = mutableMapOf<String, Int>()
-
     companion object {
         var menuNum = 0
     }
 
-    open fun menuPrint () {
+    open fun foodMenuPrint () {
         println("")
     }
-    open fun paymentMenu () {
+    open fun paymentMenuPrint () {
         println("")
     }
 }

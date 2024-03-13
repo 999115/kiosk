@@ -5,18 +5,19 @@ import com.example.kiosk.BugerMenu
 import com.example.kiosk.ElseMenu
 import com.example.kiosk.EventMenu
 import com.example.kiosk.MainMenu
-import com.example.kiosk.Menu
 import com.example.kiosk.Menu.Companion.menuNum
+import com.example.kiosk.Payment
 import com.example.kiosk.SideMenu
 
 fun main() {
 
     var userMenu1 = 0
-    var userMenu2 = 0
-    var userMenu3 = 0
+    var priceRange = (10..500)
+    var userTime = 0
+
+    println("맥버거에 오신 것을 환영합니다.")
 
     while (true) {
-
         var mainMenu = MainMenu(userMenu1)
         mainMenu.mainMenuPrint()
 
@@ -27,12 +28,21 @@ fun main() {
             2 -> BeverageMenu(userMenu1)
             3 -> SideMenu(userMenu1)
             4 -> EventMenu(userMenu1)
-            5 -> break
+            0 -> break
             else -> ElseMenu(userMenu1)
         }
-        afterMain.menuPrint()
-        afterMain.paymentMenu()
+
+        afterMain.foodMenuPrint()
+        if (menuNum == 0) continue
+        afterMain.paymentMenuPrint()
+
+        var userMoney = priceRange.random() * 100
+        var payment = Payment(userMoney, cartPrice) //장바구니 가격을 가져오기
+        payment.payment()
+
     }
+
+    println("감사합니다. 안녕히 가세요.")
 
 //    while (true) {
 //
