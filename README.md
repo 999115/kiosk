@@ -1,71 +1,121 @@
-<!-- Heading -->
-# Heading 1
-## Heading 2
-### Heading 3
-#### Heading 4
-##### Heading 5
-###### Heading 6
-Paragraph
-안녕하세요
-<!-- Line -->
-___
+---
 
-<!-- Text attributes -->
-This is the **bold** text and this is the *italic* text and let's do ~~strikethrough~~.
+<br>
 
-<!-- Quote -->
-> Don't forget to code your dream
-
-<!-- Bullet list -->
-Fruits:
-🍎
-🍋
-
-Other fruits:
-🍑
-🍏
-
-<!-- Numbered list -->
-Numbers:
-1. first
-2. second
-3. third
-
-<!-- Link -->
-Click [Here](http://academy.dream-coding.com/)
-
-<!-- Image -->
-![image description](https://user-images.githubusercontent.com/61736137/102153953-b2881000-3ebb-11eb-9581-7026bc8e169e.jpg)
+# <center>※ 맥버거 키오스크 구현 ※</center>
+<br>
 
 
-<!-- Table -->
-|Header|Description|
-|:--:|:--:|
-|Cell1|Cell2|
-|Cell3|Cell4|
-|Cell5|Cell6|
+---
 
-<!-- Code -->
-To print message in the console, use `console.log('your message')` and ..
 
-```ts
-console.log('hello')
-```
+## [필요한 기능]
 
-<!-- PR Description Example -->
-# What is Lorem Ipsum?
-`Lorem Ipsum` is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy **text ever since the 1500s**, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+### 1. 메인메뉴
+* 인삿말 및 메뉴 선택 안내
+* 음식 대분류 작성
+* 프로그램 종료
+* 다른 번호 입력 시 오류 메세지 출력
 
-```ts
-console.log('Hello World!');
-```
+### 2. 세부메뉴
+* 메뉴 안내
+* 각 음식 대분류 별로 세부메뉴 작성 (가격 포함)
+* 이전 메뉴로 돌아가기
+* 오류 메세지
 
-|Feature|Description|
-|--|--|
-|Feature1|<img src="https://user-images.githubusercontent.com/61736137/102153953-b2881000-3ebb-11eb-9581-7026bc8e169e.jpg" width="400"><br>Feature1. Responsive Web Page|
-|Feature2|<img src="https://user-images.githubusercontent.com/61736137/102153956-b451d380-3ebb-11eb-9ab7-f8bad6c05a97.png" width="400"><br>Feature2. Responsive Web Page|
+### 3. 결제메뉴
+* 선택한 음식의 가격과 잔액 출력
+* 결제 및 장바구니 기능으로 연결
+* 이전 메뉴로 돌아가기
+* 오류 메세지
 
-## Before release
-- [x] Finish my changes
-- [ ] Push my commits to GitHub
-- [ ] Open a pull request
+### 4. 결제기능
+* 소지 금액 랜덤 값으로 지정 후 결제 금액으로 차감
+* 잔액 부족할 시 결제 실패 메세지 입력 후 메뉴 재선택 요구
+* 잔액은 그대로 유지되도록 설계 (싱글턴 이용)
+
+### 5. 장바구니 기능
+* 선택한 메뉴 저장해두는 cart list 생성
+* 메인 메뉴에서 접근
+* 장바구니 목록 - 각 금액과 총액, 잔액 출력
+* 선택한 메뉴만 결제하는 기능
+
+### 6. 주문 완료 후 안내사항
+* 3초 딜레이 후 표출
+* 주문 대기번호 출력
+* 랜덤 번호 줘서 대기번호 뜰 때까지 주문번호 출력
+* 해당 대기번호 출력 시 주문완료 메세지와 함께 종료
+
+<br>
+
+---
+
+## [클래스 다이어그램]
+| Menu (부모클래스) | content |
+| - | - |
+| - menuName: MutableList | 전체 메뉴 리스트 선언 |
+| - menuPrice: MutableMap | 전체 메뉴 리스트 선언 |
+| + foodMenuPrint(): Unit | 메뉴 가격 출력 |
+
+<br>
+
+| MainMenu (자식클래스) | content |
+| - | - |
+| + MainMenuPrint(): Unit | 메인메뉴 출력 |
+
+<br>
+
+| BugerMenu (자식클래스) | content |
+| - | - |
+| - menuName: MutableList | Menu에서 buger만 받아옴 |
+| - menuPrice: MutableMap | Menu에서 buger만 받아옴 |
+| + foodMenuPrint(): Unit | 받아온 buger 출력 가능하게 작성 |
+
+<br>
+
+| BeverageMenu (자식클래스) | content |
+| - | - |
+| - menuName: MutableList | Menu에서 beverage만 받아옴 |
+| - menuPrice: MutableMap | Menu에서 beverage만 받아옴 |
+| + foodMenuPrint(): Unit | 받아온 beverage 출력 가능하게 작성 |
+<br>
+
+| SideMenu (자식클래스) | content |
+| - | - |
+| - menuName: MutableList | Menu에서 side만 받아옴 |
+| - menuPrice: MutableMap | Menu에서 side만 받아옴 |
+| + foodMenuPrint(): Unit | 받아온 side 출력 가능하게 작성 |
+<br>
+
+| EventMenu (자식클래스) | content |
+| - | - |
+| - menuName: MutableList | Menu에서 event만 받아옴 |
+| - menuPrice: MutableMap | Menu에서 event만 받아옴 |
+| + foodMenuPrint(): Unit | 받아온 event 출력 가능하게 작성 |
+
+<br>
+
+| PaymentMenu (자식클래스) | content |
+| - | - |
+| - money: Int | 사용자의 소지금액 받아옴 |
+| - price: Int | 선택한 메뉴의 가격 받아옴 |
+| + paymentMenuPrint(): Unit | 결제 메뉴 출력 |
+| + payment(): Int | 금액 차감 후 차감 금액 반환 |
+
+<br>
+
+| CartMenu (자식클래스) | content |
+| - | - |
+| - cart: MutableList | 카트에 추가한 메뉴들 |
+| - price: Int | 선택한 메뉴의 가격 받아옴 |
+| + cartMenuPrint(): Unit | 장바구니 메뉴 출력 |
+
+<br>
+
+| EndMenu (자식클래스) | content |
+| - | - |
+| - orderNum: Int | 랜덤값으로 생성되는 주문번호 |
+| - waitNum: Int | 사용자가 받은 대기번호 |
+| + endMenuPrint(): Unit | 주문완료 후 대기메뉴 출력 |
+
+<br>

@@ -2,7 +2,7 @@ package com.example.kiosk
 
 class BugerMenu(menuNum: Int) : Menu(menuNum) {
 
-    var menuIndex = mutableListOf<String>(
+    var menuName = mutableListOf<String>(
         "더블 쿼터파운더 치즈 버거\t",
         "빅맥 버거\t\t\t\t",
         "맥크리스피 버거\t\t\t",
@@ -12,21 +12,21 @@ class BugerMenu(menuNum: Int) : Menu(menuNum) {
         "불고기 버거\t\t\t\t"
     )
 
-    var menuMap = mutableMapOf<String, Int>(
-        menuIndex[0] to 7400,
-        menuIndex[1] to 5500,
-        menuIndex[2] to 6800,
-        menuIndex[3] to 3500,
-        menuIndex[4] to 6400,
-        menuIndex[5] to 5800,
-        menuIndex[6] to 3100
+    var menuPrice = mutableMapOf<String, Int>(
+        menuName[0] to 7400,
+        menuName[1] to 5500,
+        menuName[2] to 6800,
+        menuName[3] to 3500,
+        menuName[4] to 6400,
+        menuName[5] to 5800,
+        menuName[6] to 3100
     )
 
     override fun foodMenuPrint() {
         println("햄버거 메뉴입니다.")
         println("원하는 메뉴를 선택해 번호를 입력해주세요.")
-        for (i in menuIndex.indices) {
-            println("${i + 1} | ${menuIndex[i]}| ${menuMap[menuIndex[i]]}원")
+        for (i in menuName.indices) {
+            println("${i + 1} | ${menuName[i]}| ${menuPrice[menuName[i]]}원")
         }
         println("0 | 이전")
 
@@ -34,8 +34,8 @@ class BugerMenu(menuNum: Int) : Menu(menuNum) {
             try {
                 menuNum = readLine()!!.toInt()
                 when (menuNum) {
-                    in menuIndex.indices -> break
-                    else -> println("0부터 ${menuIndex.size}까지의 숫자만 입력해주세요.")
+                    in menuName.indices -> break
+                    else -> println("0부터 ${menuName.size}까지의 숫자만 입력해주세요.")
                 }
             } catch (e: NumberFormatException) {
                 println("숫자만 입력해주세요.")
@@ -46,7 +46,7 @@ class BugerMenu(menuNum: Int) : Menu(menuNum) {
     override fun paymentMenuPrint() {
         println("결제메뉴입니다.")
         println("현재 잔액 \t: 원")
-        println("결제할 금액 \t: ${menuMap[menuIndex[menuNum - 1]]}원")
+        println("결제할 금액 \t: ${menuPrice[menuName[menuNum - 1]]}원")
         println("원하는 메뉴를 선택해 번호를 입력해주세요.")
         println("1 | 결제")
         println("2 | 장바구니에 넣고 주문 계속하기")

@@ -12,7 +12,7 @@ import com.example.kiosk.SideMenu
 fun main() {
 
     var userMenu1 = 0
-    var priceRange = (10..500)
+    var userMoney = (10..500).random() * 100
     var userTime = 0
 
     println("맥버거에 오신 것을 환영합니다.")
@@ -36,7 +36,6 @@ fun main() {
         if (menuNum == 0) continue
         afterMain.paymentMenuPrint()
 
-        var userMoney = priceRange.random() * 100
         var payment = Payment(userMoney, cartPrice) //장바구니 가격을 가져오기
         payment.payment()
 
