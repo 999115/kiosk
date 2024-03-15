@@ -13,5 +13,6 @@ open class Menu() {
         var money = 0
         var price = 0
         var cartContent = mutableListOf<Pair<String, Int>>()
+        var nowTime = Pair((0..23).random(), (0..59).random())
     }
 }

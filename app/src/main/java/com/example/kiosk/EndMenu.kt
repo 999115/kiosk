@@ -9,21 +9,24 @@ import kotlin.concurrent.thread
 class EndMenu : Menu() {
     override fun menuPrintAndInput() {
         var orderNum = (100..500).random()
-        var waitNum = orderNum + (0..10).random()
+        var waitNum = orderNum + (0..5).random()
 
         thread(start = true) {
             runBlocking {
                 launch {
                     delay(3000)
 
-                    println("""
+                    println(
+                        """
                         
                         주문이 완료되었습니다.
                         주문 대기 장소는 이쪽입니다.
-                    """.trimIndent())
+                    """.trimIndent()
+                    )
 
                     while (waitNum > orderNum) {
-                        println("""
+                        println(
+                            """
                     
                         대기번호 : ${waitNum}번
                         현재 주문번호 : ${orderNum}번
@@ -33,7 +36,7 @@ class EndMenu : Menu() {
                         orderNum++
                         runBlocking {
                             launch {
-                                delay(2000)
+                                delay(5000)
                             }
                         }
                     }

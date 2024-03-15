@@ -10,6 +10,7 @@ import com.example.kiosk.Menu.Companion.menuNum1
 import com.example.kiosk.Menu.Companion.menuNum2
 import com.example.kiosk.Menu.Companion.menuNum3
 import com.example.kiosk.Menu.Companion.money
+import com.example.kiosk.Menu.Companion.nowTime
 import com.example.kiosk.Menu.Companion.price
 import com.example.kiosk.PaymentMenu
 import com.example.kiosk.SideMenu
@@ -18,13 +19,21 @@ fun main() {
 
     money = (10..500).random() * 100
     var userMoney = money
+    var breakTime = (15..16)
 
     println("맥버거에 오신 것을 환영합니다.")
+    println("현재 시각은 ${nowTime.first}시 ${nowTime.second}분입니다.")
 
     while (true) {
 
         var mainMenu = MainMenu()
         mainMenu.menuPrintAndInput()
+
+
+        if (nowTime.first in breakTime) {
+            println("15시부터 17시까지 브레이크 타임이므로 주문하실 수 없습니다.")
+            break
+        }
 
         var afterMainMenu = when (menuNum1) {
             1 -> BugerMenu()

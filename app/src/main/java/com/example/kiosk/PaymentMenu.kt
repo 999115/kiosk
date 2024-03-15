@@ -31,11 +31,17 @@ class PaymentMenu() : Menu() {
     }
 
     override fun pay() {
-        if (money >= price) {
+
+        var checkTime = Pair(0, (0..23))
+
+        if ((nowTime.first == checkTime.first) && (nowTime.second in checkTime.second)) {
+            println("은행 점검시간입니다. 결제가 실패하였습니다.")
+            println("처음 화면으로 돌아갑니다.")
+        } else if (money >= price) {
             money -= price
             println("결제가 완료되었습니다.")
             println("현재 잔액 : ${money}원")
-        } else {
+        }else {
             println("잔액이 부족하여 결제가 실패하였습니다.")
             println("처음 화면으로 돌아갑니다.")
         }
