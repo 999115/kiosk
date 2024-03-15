@@ -1,14 +1,27 @@
 package com.example.kiosk
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlin.concurrent.thread
+
 class CartMenu() : Menu() {
 
     override fun menuPrintAndInput() {
+
         println(
             """
             장바구니입니다.
             추가한 메뉴 : ${cartContent.map { it.first.trim() }}
+            """.trimIndent()
+        )
+        for (i in cartContent.indices) {
+            println("${i + 1} | ${cartContent[i].first.trim()} | ${cartContent[i].second}원")
+        }
+        println(
+            """            
+            총 결제할 금액 : ${price}원
             현재 잔액 : ${money}원
-            결제할 금액 : ${price}원
+            
             결제하시겠습니까?
             1 | 예
             0 | 아니요 (처음 화면으로 돌아갑니다)
