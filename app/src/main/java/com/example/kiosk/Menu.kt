@@ -6,7 +6,9 @@ open class Menu() {
     open fun pay() {}
 
     companion object {
-        var menuNum = 0
+        var menuNum1 = 0
+        var menuNum2 = 0
+        var menuNum3 = 0
         var menuContent = mutableListOf<Pair<String, Int>>()
         var money = 0
         var price = 0

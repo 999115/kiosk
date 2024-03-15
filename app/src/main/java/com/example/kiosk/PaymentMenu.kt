@@ -2,13 +2,14 @@ package com.example.kiosk
 
 class PaymentMenu() : Menu() {
     override fun menuPrintAndInput() {
-        price = menuContent[menuNum - 1].second!!
+        price = menuContent[menuNum2 - 1].second!!
 
         println(
             """
             결제메뉴입니다.
-            현재 잔액 : ${money}원
+            선택한 메뉴 : ${menuContent[menuNum2 - 1].first.trim()}
             결제할 금액 : ${price}원
+            현재 잔액 : ${money}원
             원하는 메뉴를 선택해 번호를 입력해주세요.
             1 | 결제
             2 | 장바구니에 넣고 주문 계속하기
@@ -18,8 +19,8 @@ class PaymentMenu() : Menu() {
 
         while (true) {
             try {
-                menuNum = readLine()!!.toInt()
-                when (menuNum) {
+                menuNum3 = readLine()!!.toInt()
+                when (menuNum3) {
                     in 0..2 -> break
                     else -> println("0부터 2까지의 숫자만 입력해주세요.")
                 }

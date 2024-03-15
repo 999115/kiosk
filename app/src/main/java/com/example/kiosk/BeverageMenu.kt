@@ -29,8 +29,8 @@ class BeverageMenu() : Menu() {
 
         while (true) {
             try {
-                menuNum = readLine()!!.toInt()
-                when (menuNum - 1) {
+                menuNum2 = readLine()!!.toInt()
+                when (menuNum2 - 1) {
                     -1 -> break
                     in menuContent.indices -> break
                     else -> println("0부터 ${menuContent.size}까지의 숫자만 입력해주세요.")

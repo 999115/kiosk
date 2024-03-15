@@ -12,10 +12,12 @@ class EventMenu() : Menu() {
     }
 
     override fun menuPrintAndInput() {
-        println("""
+        println(
+            """
             이벤트 메뉴입니다.
             원하는 메뉴를 선택해 번호를 입력해주세요.
-        """.trimIndent())
+        """.trimIndent()
+        )
         for (i in menuContent.indices) {
             println("${i + 1} | ${menuContent[i].first}| ${menuContent[i].second}원")
         }
@@ -23,8 +25,8 @@ class EventMenu() : Menu() {
 
         while (true) {
             try {
-                menuNum = readLine()!!.toInt()
-                when (menuNum - 1) {
+                menuNum2 = readLine()!!.toInt()
+                when (menuNum2 - 1) {
                     -1 -> break
                     in menuContent.indices -> break
                     else -> println("0부터 ${menuContent.size}까지의 숫자만 입력해주세요.")
