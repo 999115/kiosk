@@ -2,128 +2,94 @@ package com.example.myapplication
 
 import com.example.kiosk.BeverageMenu
 import com.example.kiosk.BugerMenu
-import com.example.kiosk.ElseMenu
+import com.example.kiosk.CartMenu
+import com.example.kiosk.EndMenu
 import com.example.kiosk.EventMenu
 import com.example.kiosk.MainMenu
-import com.example.kiosk.Menu
-import com.example.kiosk.Menu.Companion.menuNum
+import com.example.kiosk.Menu.Companion.menuNum1
+import com.example.kiosk.Menu.Companion.menuNum2
+import com.example.kiosk.Menu.Companion.menuNum3
+import com.example.kiosk.Menu.Companion.money
+import com.example.kiosk.Menu.Companion.nowTime
+import com.example.kiosk.Menu.Companion.price
+import com.example.kiosk.PaymentMenu
 import com.example.kiosk.SideMenu
 
 fun main() {
 
-    var userMenu1 = 0
-    var userMenu2 = 0
-    var userMenu3 = 0
+    money = (10..500).random() * 100
+    var userMoney = money
+    var breakTime = (15..16)
+
+    println("맥버거에 오신 것을 환영합니다.")
+    println("현재 시각은 ${nowTime.first}시 ${nowTime.second}분입니다.")
 
     while (true) {
 
-        var mainMenu = MainMenu(userMenu1)
-        mainMenu.mainMenuPrint()
+        var mainMenu = MainMenu()
+        mainMenu.menuPrintAndInput()
 
-        userMenu1 = menuNum
 
-        var afterMenu = when (userMenu1) {
-            1 -> BugerMenu(userMenu1)
-            2 -> BeverageMenu(userMenu1)
-            3 -> SideMenu(userMenu1)
-            4 -> EventMenu(userMenu1)
-            5 -> break
-            else -> ElseMenu(userMenu1)
+        if (nowTime.first in breakTime) {
+            println("15시부터 17시까지 브레이크 타임이므로 주문하실 수 없습니다.")
+            break
         }
-        afterMenu.menuPrint()
+
+        var afterMainMenu = when (menuNum1) {
+            1 -> BugerMenu()
+            2 -> BeverageMenu()
+            3 -> SideMenu()
+            4 -> EventMenu()
+            5 -> if (price == 0) {
+                println("장바구니에 추가된 상품이 없습니다. 처음 화면으로 돌아갑니다.")
+                continue
+            } else CartMenu()
+
+            6 -> if (userMoney == money) {
+                println("결제된 금액이 없습니다. 처음 화면으로 돌아갑니다.")
+                continue
+            } else EndMenu()
+
+            0 -> if (userMoney != money) {
+                println("결제된 금액이 있습니다. 결제 완료를 눌러주세요.")
+                continue
+            } else break
+
+            else -> {
+                println("0부터 6까지의 숫자만 입력해주세요.")
+                continue
+            }
+        }
+        afterMainMenu.init()
+        afterMainMenu.menuPrintAndInput()
+        if (menuNum2 == 0) continue
+
+        var afterFoodMenu = PaymentMenu()
+        var afterPay = EndMenu()
+        when (menuNum1) {
+            5 -> {
+                afterFoodMenu.pay()
+                afterPay.menuPrintAndInput()
+                break
+            }
+
+            6 -> break
+        }
+
+        afterFoodMenu.menuPrintAndInput()
+
+        var payment = when (menuNum3) {
+            0 -> continue
+            1 -> PaymentMenu()
+            2 -> CartMenu()
+            else -> {
+                println("0부터 2까지의 숫자만 입력해주세요.")
+                continue
+            }
+        }
+        payment.pay()
     }
 
-//    while (true) {
-//
-//        println("두번째 숫자를 입력해주세요.")
-//        while (true) {
-//            try {
-//                userNum2 = readLine()!!.toDouble()
-//                break
-//            } catch (e: NumberFormatException) {
-//                println("숫자만 입력해주세요.")
-//            }
-//        }
-//
-//        println("계산을 그만하려면 -1을, 아니라면 연산자를 입력해주세요.")
-//        userOperator = readLine()!!
-//
-//        var content = when (userOperator) {
-//            "-1" -> break
-//            "+" -> AddOperation(userNum1, userOperator, userNum2)
-//            "-" -> SubtractOperation(userNum1, userOperator, userNum2)
-//            "*" -> MultiplyOperation(userNum1, userOperator, userNum2)
-//            "/" -> DivideOperation(userNum1, userOperator, userNum2)
-//            "%" -> OddOperation(userNum1, userOperator, userNum2)
-//            else -> ElseOperation(userNum1, userOperator, userNum2)
-//        }
-//
-//        content.calculate()
-//
-//        when (userOperator) {
-//            "+" -> userNum1 = AddOperation(userNum1, userOperator, userNum2).result
-//            "-" -> userNum1 = SubtractOperation(userNum1, userOperator, userNum2).result
-//            "*" -> userNum1 = MultiplyOperation(userNum1, userOperator, userNum2).result
-//            "/" -> userNum1 = DivideOperation(userNum1, userOperator, userNum2).result
-//            "%" -> userNum1 = OddOperation(userNum1, userOperator, userNum2).result
-//            else -> print("")
-//        }
-//    }
+    println("감사합니다. 안녕히 가세요.")
+
 }
-//
-//
-//open class Calculator(num1: Double, operator: String, num2: Double) {
-//    var num1: Double = num1
-//    var operator: String = operator
-//    var num2: Double = num2
-//    var result: Double = 0.0
-//
-//    init {
-//        this.result = result
-//    }
-//
-//    open fun calculate() {
-//        println(result)
-//    }
-//
-//}
-//
-//class AddOperation(num1: Double, operator: String, num2: Double) :
-//    Calculator(num1, operator, num2) {
-//    init {
-//        result = num1 + num2
-//    }
-//
-//    override fun calculate() {
-////        super.calculate()
-//        println(result)
-//    }
-//}
-//
-//class OddOperation(num1: Double, operator: String, num2: Double) :
-//    Calculator(num1, operator, num2) {
-//    init {
-//        result = num1 % num2
-//    }
-//
-//    override fun calculate() {
-////        super.calculate()
-//        if (num2 != 0.0) {
-//            println(result)
-//        } else {
-//            println("0으로 나눌 수 없습니다.")
-//        }
-//    }
-//}
-//
-//class ElseOperation(num1: Double, operator: String, num2: Double) :
-//    Calculator(num1, operator, num2) {
-//    init {
-//        result = 0.0
-//    }
-//
-//    override fun calculate() {
-////        super.calculate()
-//        println("잘못된 입력입니다. 두번째 숫자 입력을 초기화합니다.")
-//    }
-//}

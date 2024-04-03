@@ -1,19 +1,25 @@
 package com.example.kiosk
 
-class MainMenu(menuNum: Int) : Menu(menuNum) {
+class MainMenu() : Menu() {
 
-    fun mainMenuPrint() {
-        println("맥버거에 오신 것을 환영합니다.")
-        println("원하는 메뉴를 선택해 번호를 입력해주세요.")
-        println("1 | 햄버거")
-        println("2 | 음료")
-        println("3 | 사이드 & 디저트")
-        println("4 | 이벤트 메뉴")
-        println("5 | 종료")
+    override fun menuPrintAndInput() {
+
+        println(
+            """
+            원하는 메뉴를 선택해 번호를 입력해주세요.
+            1 | 햄버거
+            2 | 음료
+            3 | 사이드 & 디저트
+            4 | 이벤트 메뉴
+            5 | 장바구니 확인
+            6 | 결제 완료 (결제한 메뉴가 있다면 눌러주세요)
+            0 | 키오스크 종료 (결제 후 입력 시 주문 접수가 안됩니다)
+        """.trimIndent()
+        )
 
         while (true) {
             try {
-                menuNum = readLine()!!.toInt()
+                menuNum1 = readLine()!!.toInt()
                 break
             } catch (e: NumberFormatException) {
                 println("숫자만 입력해주세요.")
